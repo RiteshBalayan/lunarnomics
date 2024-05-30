@@ -1,0 +1,97 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh; 
+  }
+  
+  .banner-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 1500px; 
+  }
+  .banner {
+    flex: 1; 
+    height: 100%; 
+    margin: 10px 10px; 
+  }
+  
+  .banner.first {
+    flex: 1; 
+    display: flex;
+    background-color: none; 
+    flex-direction: row;
+  }
+
+  .banner.big {
+    flex: 2; 
+    display: flex;
+    flex-direction: row;
+    background-color: none;
+  }
+
+  .banner.last {
+    flex: 1; 
+    display: flex;
+    flex-direction: row;
+    background-color: none; 
+  }
+
+  .middle-line {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+  }
+
+.middle-line-top,
+.middle-line-mid,
+.middle-line-down { /* Equal width for both components */ 
+  background-color: none; 
+  margin: 10px 0px; 
+}
+
+  .last-line {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+  }
+
+  .last-line-top,
+  .last-line-down { /* Equal width for both components */
+    background-color: none; 
+    margin: 10px 0px; 
+  }
+
+
+@media screen and (min-width: 1025px) {
+    .middle-line-mid {
+      display: none; /* Hide the middle line on screens above 1000px width */
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .home-page {
+      display: block; /* Remove flexbox layout entirely */
+    }
+  
+    .banner-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%; 
+      }
+
+      .banner.first {
+        display: none;
+      }
+
+      .last-line-top{
+        display: none;
+    }
+  }
+
+  @media screen and (max-width: 1500px) {
+    .banner-wrapper {
+      width: 100%; /* Set width to 100% when screen width is less than 1500px */
+    }
+  }
+  
