@@ -149,6 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
+    'https://main.d1yhf7xynhb25k.amplifyapp.com/',
 ]
 
 STORAGES = {
