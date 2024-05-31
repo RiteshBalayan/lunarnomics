@@ -195,7 +195,7 @@ class Probe(models.Model):
 
 class CapitalToComapny(models.Model):
     name = models.ForeignKey(Company, related_name='name_CapitalToCompany', blank=True, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=0, null=True, blank=True)
+    amount = models.BigIntegerField(default=0, null=True, blank=True)
     Reference = models.ManyToManyField(Reference, related_name='reference_CapitalToCompany', blank=True)
 
     def __str__(self):
