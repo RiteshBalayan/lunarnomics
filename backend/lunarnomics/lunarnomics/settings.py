@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,6 +36,7 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -142,6 +144,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = 'https://lunarnomics.s3.ap-south-1.amazonaws.com/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'https://lunarnomics.s3.ap-south-1.amazonaws.com/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -149,10 +157,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-    'https://main.d1yhf7xynhb25k.amplifyapp.com/',
-    'https://lunarnomics.info/'
+    'https://main.d1yhf7xynhb25k.amplifyapp.com',
+    'https://lunarnomics.info'
 ]
 
+'''
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -161,3 +170,18 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+'''
+
+#S3 setup
+AWS_ACCESS_KEY_ID = 'AKIASSDCVFHFVB6MI5LG'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'lunarnomics'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_REGION_NAME = 'ap-south-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERITY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_ENDPOINT_URL = "https://lunarnomics.s3.ap-south-1.amazonaws.com"
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
