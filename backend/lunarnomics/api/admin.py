@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import Reference, Paragraph, Image, Article, NewsStory, Company, Project, Technology, Launch, Probe, CapitalToComapny, CapitalToProject, CapitalToTechnology, CapitalToProbe, CapitalToLaunch, Capital
 from .models import NewsStory, Paragraph, Image, Reference, People
+from django.contrib.admin.widgets import AdminFileWidget
+from django.utils.html import format_html
+
 
 class ParagraphInline(admin.TabularInline):
     model = Paragraph.paragraphs_NewsStory.through
@@ -58,7 +61,7 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('title', 'subtitle', 'author_name')
     fieldsets = (
         (None, {
-            'fields': ('title', 'subtitle', 'type','author_name', 'thumbnail')
+            'fields': ('title', 'subtitle', 'type','author_name', 'thumbnail',"thumbnail_image")
         }),
     )
     inlines = [AParagraphInline, AImageInline, AReferenceInline]
@@ -69,6 +72,16 @@ class ArticleAdmin(admin.ModelAdmin):
         if db_field.name in ['title', 'subtitle']:
             formfield.widget.attrs['style'] = 'width: 100%;'  # Set width to 100% for title and subtitle fields
         return formfield
+    
+    readonly_fields = [ "thumbnail_image"]
+
+    def thumbnail_image(self, obj):
+        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
+            url = obj.thumbnail.url,
+            width=100,
+            height=100,
+            )
+    )
     
 admin.site.register(Article, ArticleAdmin)
 
@@ -145,11 +158,13 @@ admin.site.register(Company, CompanyAdmin)
 
 
 
+from django.utils.safestring import mark_safe
+
 class ProjectAdmin(admin.ModelAdmin):
     filter_horizontal = ('developers', 'codevelopers', 'parent_projects', 'daughter_projects')
     fieldsets = (
         (None, {
-            'fields': ('name','logo','objective', 'start_date', 'article', 'reference')
+            'fields': ('name','logo','logo_image','objective', 'start_date', 'article', 'reference')
         }),
         ('developers', {
             'fields': ('developers', 'codevelopers'),
@@ -160,6 +175,24 @@ class ProjectAdmin(admin.ModelAdmin):
             'classes': ('collapse',)  # Hide this section by default
         }),
     )
+
+
+    readonly_fields = [ "logo_image"]
+
+    def logo_image(self, obj):
+        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
+            url = obj.logo.url,
+            width=100,
+            height=100,
+            )
+    )
+
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name in ['objective']:
+            formfield.widget.attrs['style'] = 'width: 100%;'  # Set width to 100% for title and subtitle fields
+        return formfield
 
 admin.site.register(Project, ProjectAdmin)
 

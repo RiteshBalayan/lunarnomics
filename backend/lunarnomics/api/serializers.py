@@ -97,16 +97,23 @@ class CompanySerializerInLine(serializers.ModelSerializer):
         model = Company
         fields = ('__all__')
 
-
-class ProjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Project
-        fields = '__all__'
-
 class ProjectSerializerInLine(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = ('name', 'id','logo', 'objective', 'start_date')
+
+class ProjectSerializer(serializers.ModelSerializer):
+    article = ArticleSerializer(read_only=True)
+    parent_projects = ProjectSerializerInLine(many=True, read_only=True)
+    daughter_projects = ProjectSerializerInLine(many=True, read_only=True)
+    developers = CompanySerializerInLine(many=True, read_only=True)
+    codevelopers = CompanySerializerInLine(many=True, read_only=True)
+
+    class Meta:
+        model = Project
+        fields = ('name', 'id', 'logo', 'objective', 'start_date','article', 'parent_projects', 'daughter_projects', 'developers', 'codevelopers', 'reference')
+
+
 
 
 class LaunchSerializer(serializers.ModelSerializer):
