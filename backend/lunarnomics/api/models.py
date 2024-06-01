@@ -92,6 +92,7 @@ class Company(models.Model):
         ('government', 'government'),
         ('nonprofit', 'nonprofit'),
         ('collaboration', 'collaboration'),
+        ('investor','investor'),
     ]
         
     name = models.CharField(max_length=100)
@@ -189,7 +190,7 @@ class Probe(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=150, choices=probe_type, blank=True)
     launch = models.ForeignKey(Launch, related_name='launch_Probe', on_delete=models.CASCADE)
-    mass = models.IntegerField(blank=True)
+    mass = models.BigIntegerField(blank=True)
     technology = models.ManyToManyField(Technology, related_name='technology_Probe', blank=True)
     reference = models.ManyToManyField(Reference, related_name='reference_Probe', blank=True)
 
@@ -203,7 +204,7 @@ class CapitalToComapny(models.Model):
 
 class CapitalToProject(models.Model):
     name = models.ForeignKey(Project, related_name='name_CapitalToProject', blank=True, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=0, null=True, blank=True)
+    amount = models.BigIntegerField(default=0, null=True, blank=True)
     Reference = models.ManyToManyField(Reference, related_name='reference_CapitalToProject', blank=True)
 
     def __str__(self):
@@ -211,7 +212,7 @@ class CapitalToProject(models.Model):
 
 class CapitalToTechnology(models.Model):
     name = models.ForeignKey(Technology, related_name='name_CapitalToTechnology', blank=True, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=0, null=True, blank=True)
+    amount = models.BigIntegerField(default=0, null=True, blank=True)
     Reference = models.ManyToManyField(Reference, related_name='reference_CapitalToTechnology', blank=True)
 
     def __str__(self):
@@ -219,7 +220,7 @@ class CapitalToTechnology(models.Model):
 
 class CapitalToProbe(models.Model):
     name = models.ForeignKey(Probe, related_name='name_CapitalToProbe', blank=True, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=0, null=True, blank=True)
+    amount = models.BigIntegerField(default=0, null=True, blank=True)
     Reference = models.ManyToManyField(Reference, related_name='reference_CapitalToProbe', blank=True)
 
     def __str__(self):
@@ -227,7 +228,7 @@ class CapitalToProbe(models.Model):
 
 class CapitalToLaunch(models.Model):
     name = models.ForeignKey(Launch, related_name='name_CapitalToLaunch', blank=True, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=0, null=True, blank=True)
+    amount = models.BigIntegerField(default=0, null=True, blank=True)
     Reference = models.ManyToManyField(Reference, related_name='reference_CapitalToLaunch', blank=True)
 
     def __str__(self):
@@ -250,7 +251,7 @@ class Capital(models.Model):
 
     name = models.CharField(max_length=200, blank=True)
     type = models.CharField(max_length=20, choices=capital_type, blank=True)
-    amount =  models.IntegerField(default=0, null=True, blank=True)
+    amount =  models.BigIntegerField(default=0, null=True, blank=True)
     date = models.DateField(blank=True)
     status = models.CharField(max_length=20, choices=status,blank=True)
     capital_from = models.ManyToManyField(Company, related_name='capital_from_Capital', blank=True)
