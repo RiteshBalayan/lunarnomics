@@ -31,6 +31,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://your-domain.com',
     'https://jpb2viz63a.ap-south-1.awsapprunner.com',
     'https://api.lunarnomics.info',
+    'https://lunarnomics.info',
 ]
 
 
