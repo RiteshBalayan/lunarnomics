@@ -25,5 +25,5 @@ admin.site.index_title = 'Lunarnomics App'
 
 urlpatterns = [
     path ('api/', include('api.urls')),
-    path('', admin.site.urls, name='home_page'),
+    path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
