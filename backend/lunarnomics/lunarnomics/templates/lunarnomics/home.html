@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunarnomics</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional CSS styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center text horizontally */
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .logo {
+            max-width: 300px;
+            width: 100%;
+        }
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .text-gray {
+            color: #666;
+        }
+        .btn {
+            background-color: #1e90ff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0070f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Lunarnomics</h1>
+        <p class="text-gray mt-2">For contributors only.</p>
+        <p class="text-gray">Email <a href="mailto:balanritesh@gmail.com" class="text-gray underline">balanritesh@example.com</a> to get access.</p>
+        <a href="/admin" class="btn">Go to Admin</a>
+        <div class="logo-container mt-6">
+            {% load static %}
+            <img src="{% static 'Logo.png' %}" alt="Lunarnomics Logo" class="logo">
+        </div>
+    </div>
+</body>
+</html>

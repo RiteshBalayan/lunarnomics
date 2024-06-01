@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from .views import index
 
 admin.site.site_header = 'Lunarnomics admin'
 
 admin.site.index_title = 'Lunarnomics App'
 
 urlpatterns = [
+    path('', index, name='index'),
     path ('api/', include('api.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

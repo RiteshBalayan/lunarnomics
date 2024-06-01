@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, NavLink } from 'react-router-dom';
+import AnimatedNumber from './AnimatedNumber';
 
 const LaunchDetail = ({ type }) => {
   const { id } = useParams(); // Get the pk from the URL params
@@ -69,7 +70,20 @@ const LaunchDetail = ({ type }) => {
 
     <div className="lg:hidden">
 
-      <p className="text-lg font-semibold text-gray-700">Launch Date: <span className="text-lg text-blue-800">{detail.launch_date}</span></p>
+    <p class="text-lg font-semibold text-gray-700">
+        Launch Date:
+        <span class="flex flex-row text-blue-800 space-x-2">
+        <span class="w-20 text-center shrink-0">
+          <AnimatedNumber targetNumber={detail.launch_date.slice(8, 10)} /> Day
+        </span>
+        <span class="w-20 text-center shrink-0">
+          <AnimatedNumber targetNumber={detail.launch_date.slice(5, 7)} /> Month
+        </span>
+        <span class="w-40 text-center centered shrink-0">
+          <AnimatedNumber targetNumber={detail.launch_date.slice(0, 4)} /> Year
+        </span>
+        </span>
+      </p>
       <p className="text-lg font-semibold text-gray-700">Mission Length: <span className="text-lg text-green-800">{detail.mission_length}</span></p>
       <p className="text-lg font-semibold text-gray-700">Launch Vehicle: <span className="text-lg text-purple-800">{detail.launch_vehicle}</span></p>
       <p className="text-lg font-semibold text-gray-700">Status: <span className="text-lg text-red-800">{detail.status}</span></p>
@@ -78,7 +92,7 @@ const LaunchDetail = ({ type }) => {
       <div className="mb-4">
         <h3 className="text-xl font-semibold mb-2 text-gray-700">Technology</h3>
         {detail.technology.map(tech => (
-          <p key={tech.id} className="text-lg text-orange-700">{tech.name}</p>
+          <p key={tech.id} className="inline-flex items-center text-lg text-orange-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-orange-100">{tech.name}</p>
         ))}
       </div>
     )}
@@ -88,7 +102,7 @@ const LaunchDetail = ({ type }) => {
         <h3 className="text-xl font-semibold mb-2 text-gray-700">Project</h3>
         {detail.project.map(proj => (
           <Link to={`/page/project/${proj.id}`}>
-          <p key={proj.id} className="text-lg text-red-700">{proj.name}</p>
+          <p key={proj.id} className="inline-flex items-center text-lg text-red-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-red-100">{proj.name}</p>
           </Link>
         ))}
       </div>
@@ -100,7 +114,7 @@ const LaunchDetail = ({ type }) => {
         {detail.primary_owner.map(owner => (
           <div key={owner.id}>
             <Link to={`/page/company/${owner.id}`}>
-            <p className="text-lg text-green-700">{owner.name}</p>
+            <p className="inline-flex items-center text-lg text-green-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-green-100">{owner.name}</p>
             </Link>
             {/* Render other fields if needed */}
           </div>
@@ -114,7 +128,7 @@ const LaunchDetail = ({ type }) => {
         {detail.secondary_owner.map(owner => (
           <div key={owner.id}>
             <Link to={`/page/company/${owner.id}`}>
-            <p className="text-lg text-purple-700">{owner.name}</p>
+            <p className="inline-flex items-center text-lg text-purple-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-purple-100">{owner.name}</p>
             </Link>
             {/* Render other fields if needed */}
           </div>
@@ -161,8 +175,22 @@ const LaunchDetail = ({ type }) => {
     return (
       <div className="hidden lg:block mt-10">
 
-
-      <p className="text-lg font-semibold text-gray-700">Launch Date: <span className="text-lg text-blue-800">{detail.launch_date}</span></p>
+      <p class="text-lg font-semibold text-gray-700">
+        Launch Date:
+        <span class="flex flex-row text-blue-800 space-x-2">
+        <span class="w-20 text-center shrink-0">
+          <AnimatedNumber targetNumber={detail.launch_date.slice(8, 10)} /> Day
+        </span>
+        <span class="w-20 text-center shrink-0">
+          <AnimatedNumber targetNumber={detail.launch_date.slice(5, 7)} /> Month
+        </span>
+        </span>
+        <span class="flex flex-row text-blue-800 space-x-2">
+        <span class="w-40 text-center centered shrink-0">
+          <AnimatedNumber targetNumber={detail.launch_date.slice(0, 4)} /> Year
+          </span>
+        </span>
+      </p>
       <p className="text-lg font-semibold text-gray-700">Mission Length: <span className="text-lg text-green-800">{detail.mission_length}</span></p>
       <p className="text-lg font-semibold text-gray-700">Launch Vehicle: <span className="text-lg text-purple-800">{detail.launch_vehicle}</span></p>
       <p className="text-lg font-semibold text-gray-700">Status: <span className="text-lg text-red-800">{detail.status}</span></p>
@@ -171,7 +199,7 @@ const LaunchDetail = ({ type }) => {
       <div className="mb-4">
         <h3 className="text-xl font-semibold mb-2 text-gray-700">Technology</h3>
         {detail.technology.map(tech => (
-          <p key={tech.id} className="text-lg text-orange-700">{tech.name}</p>
+          <p key={tech.id} className="inline-flex items-center text-lg text-orange-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-orange-100">{tech.name}</p>
         ))}
       </div>
     )}
@@ -181,7 +209,7 @@ const LaunchDetail = ({ type }) => {
         <h3 className="text-xl font-semibold mb-2 text-gray-700">Project</h3>
         {detail.project.map(proj => (
           <Link to={`/page/project/${proj.id}`}>
-          <p key={proj.id} className="text-lg text-red-700">{proj.name}</p>
+          <p key={proj.id} className="inline-flex items-center text-lg text-red-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-red-100">{proj.name}</p>
           </Link>
         ))}
       </div>
@@ -193,7 +221,7 @@ const LaunchDetail = ({ type }) => {
         {detail.primary_owner.map(owner => (
           <div key={owner.id}>
             <Link to={`/page/company/${owner.id}`}>
-            <p className="text-lg text-green-700">{owner.name}</p>
+            <p className="inline-flex items-center text-lg text-green-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-green-100">{owner.name}</p>
             </Link>
             {/* Render other fields if needed */}
           </div>
@@ -207,7 +235,7 @@ const LaunchDetail = ({ type }) => {
         {detail.secondary_owner.map(owner => (
           <div key={owner.id}>
             <Link to={`/page/company/${owner.id}`}>
-            <p className="text-lg text-purple-700">{owner.name}</p>
+            <p className="inline-flex items-center text-lg text-purple-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-purple-100">{owner.name}</p>
             </Link>
             {/* Render other fields if needed */}
           </div>

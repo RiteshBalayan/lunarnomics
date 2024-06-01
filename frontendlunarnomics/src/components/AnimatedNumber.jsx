@@ -5,8 +5,8 @@ const AnimatedNumber = ({ targetNumber }) => {
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    const duration = 1000; // Animation duration in milliseconds
-    const steps = 50; // Number of steps for animation
+    const duration = 2000; // Animation duration in milliseconds
+    const steps = 200; // Number of steps for animation
 
     const increment = targetNumber / steps;
     const stepDuration = duration / steps;
@@ -14,11 +14,12 @@ const AnimatedNumber = ({ targetNumber }) => {
     let currentNumber = 0;
     const timer = setInterval(() => {
       currentNumber += increment;
-      setNumber(Math.floor(currentNumber));
+      const formattedNumber = Math.floor(currentNumber).toString().padStart(targetNumber.toString().length, '0');
+      setNumber(formattedNumber);
 
       if (currentNumber >= targetNumber) {
         clearInterval(timer);
-        setNumber(targetNumber);
+        setNumber(targetNumber.toString().padStart(targetNumber.toString().length, '0'));
       }
     }, stepDuration);
 
@@ -26,7 +27,7 @@ const AnimatedNumber = ({ targetNumber }) => {
   }, [targetNumber]);
 
   return (
-    <div className="font-orbitron text-5xl text-center">{number}</div>
+    <div className="font-orbitron text-3xl">{number}</div>
   );
 };
 

@@ -23,7 +23,7 @@ const HighlightsCards = () => {
   };
 
   return (
-    <div className="flex flex-wrap mt-10">
+    <div className="flex flex-wrap mt-8">
       {data.slice(0, 4).map((article, index) => (
         <Link
           key={index}

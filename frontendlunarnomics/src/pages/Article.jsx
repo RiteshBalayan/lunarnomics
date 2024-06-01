@@ -40,7 +40,7 @@ const Article = () => {
                   </Routes>
                 </div>
                 <div className='middle-line-mid'></div>
-                <div className="middle-line-down">main block middle</div>
+                <div className="middle-line-down"></div>
             </div>           
         </div>
         <div className="banner last">
