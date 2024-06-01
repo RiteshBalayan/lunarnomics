@@ -10,6 +10,7 @@ import LaunchDetail from '../components/LaunchDetail';
 import ArticleGeneral from '../components/ArticleGeneral';
 import Logo from '../components/Logo';
 import AnimatedNumber from '../components/AnimatedNumber';
+import SmallScreenSidebar from '../components/SmallScreenSidebar';
 
 import { BrowserRouter as useParams, Route, Routes } from 'react-router-dom';
 
@@ -18,11 +19,11 @@ const Article = () => {
   
   return (
     <div className="home-page">
+      <SmallScreenSidebar />
       <div className="banner-wrapper">
         <div className="banner first">
 
               <Logo />
-              <AnimatedNumber targetNumber={1000}/>
               <LaunchList />
               <ProjectList />
               <CompanyList />

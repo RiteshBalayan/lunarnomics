@@ -9,14 +9,15 @@ import Headlines from '../components/Headlines';
 import HighlightsCards from '../components/HighlightsCards';
 import Logo from '../components/Logo';
 import AnimatedNumber from '../components/AnimatedNumber';
+import SmallScreenSidebar from '../components/SmallScreenSidebar';
 
 const News = () => {
   return (
     <div className="home-page">
+      <SmallScreenSidebar />
       <div className="banner-wrapper">
         <div className="banner first">
           <Logo />
-          <AnimatedNumber targetNumber={1000}/>
           <LaunchList />
           <ProjectList />
           <CompanyList />
