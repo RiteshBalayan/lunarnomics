@@ -28,11 +28,13 @@ const LaunchDetail = ({ type }) => {
   }
 
 
-    // Merge paragraphs and images into a single array
-    const combinedContent = [...detail.article.paragraphs, ...detail.article.images];
+  // Merge paragraphs and images into a single array, if article exists
+  const combinedContent = detail.article 
+    ? [...detail.article.paragraphs, ...detail.article.images] 
+    : [];
 
-    // Sort combined content by their order fields
-    const sortedContent = combinedContent.sort((a, b) => a.order - b.order);
+  // Sort combined content by their order fields
+  const sortedContent = combinedContent.sort((a, b) => a.order - b.order);
 
 
 
@@ -92,7 +94,7 @@ const LaunchDetail = ({ type }) => {
       <div className="mb-4">
         <h3 className="text-xl font-semibold mb-2 text-gray-700">Technology</h3>
         {detail.technology.map(tech => (
-          <p key={tech.id} className="inline-flex items-center text-lg text-orange-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-orange-100">{tech.name}</p>
+          <p key={tech.id} className="inline-flex items-center text-lg text-orange-700 border border-2 border-gray-300 rounded-full px-3 py-1 mt-3 mr-3 hover:bg-orange-100">{tech.name}</p>
         ))}
       </div>
     )}
@@ -102,7 +104,7 @@ const LaunchDetail = ({ type }) => {
         <h3 className="text-xl font-semibold mb-2 text-gray-700">Project</h3>
         {detail.project.map(proj => (
           <Link to={`/page/project/${proj.id}`}>
-          <p key={proj.id} className="inline-flex items-center text-lg text-red-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-red-100">{proj.name}</p>
+          <p key={proj.id} className="inline-flex items-center text-lg text-red-700 border border-2 border-gray-300 rounded-full px-3 py-1 mt-3 mr-3 hover:bg-red-100">{proj.name}</p>
           </Link>
         ))}
       </div>
@@ -114,7 +116,7 @@ const LaunchDetail = ({ type }) => {
         {detail.primary_owner.map(owner => (
           <div key={owner.id}>
             <Link to={`/page/company/${owner.id}`}>
-            <p className="inline-flex items-center text-lg text-green-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-green-100">{owner.name}</p>
+            <p className="inline-flex items-center text-lg text-green-700 border border-2 border-gray-300 rounded-full px-3 py-1 mt-3 mr-3 hover:bg-green-100">{owner.name}</p>
             </Link>
             {/* Render other fields if needed */}
           </div>
@@ -128,7 +130,7 @@ const LaunchDetail = ({ type }) => {
         {detail.secondary_owner.map(owner => (
           <div key={owner.id}>
             <Link to={`/page/company/${owner.id}`}>
-            <p className="inline-flex items-center text-lg text-purple-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-purple-100">{owner.name}</p>
+            <p className="inline-flex items-center text-lg text-purple-700 border border-2 border-gray-300 rounded-full px-3 py-1 mt-3 mr-3 hover:bg-purple-100">{owner.name}</p>
             </Link>
             {/* Render other fields if needed */}
           </div>
@@ -199,7 +201,7 @@ const LaunchDetail = ({ type }) => {
       <div className="mb-4">
         <h3 className="text-xl font-semibold mb-2 text-gray-700">Technology</h3>
         {detail.technology.map(tech => (
-          <p key={tech.id} className="inline-flex items-center text-lg text-orange-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-orange-100">{tech.name}</p>
+          <p key={tech.id} className="inline-flex items-center text-lg text-orange-700 border border-2 border-gray-300 rounded-full px-3 py-1 mt-3 mr-3 hover:bg-orange-100">{tech.name}</p>
         ))}
       </div>
     )}
@@ -209,7 +211,7 @@ const LaunchDetail = ({ type }) => {
         <h3 className="text-xl font-semibold mb-2 text-gray-700">Project</h3>
         {detail.project.map(proj => (
           <Link to={`/page/project/${proj.id}`}>
-          <p key={proj.id} className="inline-flex items-center text-lg text-red-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-red-100">{proj.name}</p>
+          <p key={proj.id} className="inline-flex items-center text-lg text-red-700 border border-2 border-gray-300 rounded-full px-3 py-1 mt-3 mr-3 hover:bg-red-100">{proj.name}</p>
           </Link>
         ))}
       </div>
@@ -221,7 +223,7 @@ const LaunchDetail = ({ type }) => {
         {detail.primary_owner.map(owner => (
           <div key={owner.id}>
             <Link to={`/page/company/${owner.id}`}>
-            <p className="inline-flex items-center text-lg text-green-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-green-100">{owner.name}</p>
+            <p className="inline-flex items-center text-lg text-green-700 border border-2 border-gray-300 rounded-full px-3 py-1 mt-3 mr-3 hover:bg-green-100">{owner.name}</p>
             </Link>
             {/* Render other fields if needed */}
           </div>
@@ -235,7 +237,7 @@ const LaunchDetail = ({ type }) => {
         {detail.secondary_owner.map(owner => (
           <div key={owner.id}>
             <Link to={`/page/company/${owner.id}`}>
-            <p className="inline-flex items-center text-lg text-purple-700 border border-2 border-gray-300 rounded-full px-3 py-1 hover:bg-purple-100">{owner.name}</p>
+            <p className="inline-flex items-center text-lg text-purple-700 border border-2 border-gray-300 rounded-full px-3 py-1 mt-3 mr-3 hover:bg-purple-100">{owner.name}</p>
             </Link>
             {/* Render other fields if needed */}
           </div>

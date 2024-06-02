@@ -35,7 +35,7 @@ const Article = () => {
                   <Routes>
                     <Route path="/news/:pk" element={<NewsDetail />} />
                     <Route path="/company/:id" element={<CompanyDetail />} />
-                    <Route path="/project/:id" element={<ProjectDetail />} />
+                    <Route path="/project/:id" element={<ProjectDetail type="main"/>} />
                     <Route path="/general/:pk" element={<ArticleGeneral />} />
                     <Route path="/launch/:id" element={<LaunchDetail type="main"/> } />
                   </Routes>
@@ -49,7 +49,7 @@ const Article = () => {
                 <Routes>
                     <Route path="/news/:pk" element={<LaunchList />} />
                     <Route path="/company/:id" element={<ProjectList />} />
-                    <Route path="/project/:id" element={<LaunchList />} />
+                    <Route path="/project/:id" element={<ProjectDetail type="sidebar"/>} />
                     <Route path="/launch/:id" element={<LaunchDetail type="sidebar"/> } />
                   </Routes>
             </div>   

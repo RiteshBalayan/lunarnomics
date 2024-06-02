@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import NewsStory, Paragraph, Image, Reference, Company, Article, Launch, Project, Technology, Capital
+from .models import NewsStory, Paragraph, Image, Reference, Company, Article, Launch, Project, Technology, Capital, People
 
 class TechnologySerializer(serializers.ModelSerializer):
     class Meta:
@@ -82,20 +82,29 @@ class ArticleSerializerCapitallist(serializers.ModelSerializer):
         fields = ('pk','title', 'type' ,'subtitle', 'paragraphs', 'images', 'reference', 'publish_date', 'author_name', 'thumbnail', 'capital')
 
 
-
-class CompanySerializer(serializers.ModelSerializer):
-
-    article = ArticleSerializer(read_only = True)
-
-    class Meta:
-        model = Company
-        fields = ('__all__')
-
 class CompanySerializerInLine(serializers.ModelSerializer):
 
     class Meta:
         model = Company
         fields = ('__all__')
+
+class PeopleSerializerInLine(serializers.ModelSerializer):
+
+    class Meta:
+        model = People
+        fields = ('__all__')
+
+
+class CompanySerializer(serializers.ModelSerializer):
+    article = ArticleSerializer(read_only = True)
+    parent_company = CompanySerializerInLine(many=True, read_only=True)
+    daughter_company = CompanySerializerInLine(many=True, read_only=True)
+    founder = PeopleSerializerInLine(many=True, read_only=True)
+
+    class Meta:
+        model = Company
+        fields = ('__all__')
+
 
 class ProjectSerializerInLine(serializers.ModelSerializer):
     class Meta:
