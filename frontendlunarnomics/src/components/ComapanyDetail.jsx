@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, NavLink } from 'react-router-dom';
-
+import AnimatedNumber from './AnimatedNumber';
 
 const CompanyDetail = ({ type }) => {
   const { id } = useParams(); // Get the pk from the URL params
@@ -45,21 +45,36 @@ const CompanyDetail = ({ type }) => {
     <h2 className="text-3xl font-bold mb-4 text-blue-600">{detail.name}</h2>
     <p className="text-lg font-semibold text-gray-700">Objective: <span className="text-lg text-orange-800">{detail.objective}</span></p>
 
-    <p class="text-lg font-semibold text-gray-700">
-        Incorporation Date:
-        <span class="flex flex-row text-blue-800 space-x-2">
-        <span class="w-20 text-center shrink-0">
-          <AnimatedNumber targetNumber={detail.incorporation_date.slice(5, 7)} /> Month
-        </span>
-        <span class="w-40 text-center centered shrink-0">
-          <AnimatedNumber targetNumber={detail.incorporation_date.slice(0, 4)} /> Year
-        </span>
-        </span>
-      </p>
-
-    <p className="text-lg font-semibold text-gray-700">Location: <span className="text-lg text-orange-800">{detail.location}</span></p>
     <div className="lg:hidden">
 
+    <p className="text-lg font-semibold text-gray-700">
+      Incorporation Date:
+      {detail.incorporation_date ? (
+        <span className="flex flex-row text-blue-800 space-x-2">
+          <span className="w-20 text-center shrink-0">
+            <AnimatedNumber targetNumber={detail.incorporation_date.slice(5, 7)} /> Month
+          </span>
+          <span className="w-40 text-center centered shrink-0">
+            <AnimatedNumber targetNumber={detail.incorporation_date.slice(0, 4)} /> Year
+          </span>
+        </span>
+      ) : (
+        <span className="text-red-600">Date not available</span>
+      )}
+    </p>
+
+    <p className="text-lg font-semibold text-gray-700">Location: <span className="text-lg text-orange-800">{detail.location}</span></p>
+
+    {detail.founder && detail.founder.length > 0 && (
+      <div className="mb-4">
+        <h3 className="text-xl font-semibold mb-2 text-gray-700">Founder</h3>
+        {detail.founder.map(proj => (
+          
+          <p key={proj.id} className="inline-flex items-center text-lg text-green-700  text-2xl px-3 py-1 mt-3 mr-3">{proj.name}</p>
+          
+        ))}
+      </div>
+    )}
 
     {detail.parent_company && detail.parent_company.length > 0 && (
       <div className="mb-4">
@@ -83,11 +98,7 @@ const CompanyDetail = ({ type }) => {
       </div>
     )}
 
-
-
-
     </div>
-
 
       {sortedContent.map(content => (
         <div key={content.id} className="mb-4">
@@ -106,28 +117,45 @@ const CompanyDetail = ({ type }) => {
       ))}
 
 
-
-
-
-
   </div>
 
   );}
 
-
-
-
-
-
-
-
   else if (type === 'sidebar') {
     return (
-      <div className="hidden lg:block mt-10">
+    <div className="hidden lg:block mt-10">
 
 
     <img src={detail.logo} alt={"logo"} className="mb-2" />
 
+    <p className="text-lg font-semibold text-gray-700">
+      Incorporation Date:
+      {detail.incorporation_date ? (
+        <span className="flex flex-row text-blue-800 space-x-2">
+          <span className="w-20 text-center shrink-0">
+            <AnimatedNumber targetNumber={detail.incorporation_date.slice(5, 7)} /> Month
+          </span>
+          <span className="w-40 text-center centered shrink-0">
+            <AnimatedNumber targetNumber={detail.incorporation_date.slice(0, 4)} /> Year
+          </span>
+        </span>
+      ) : (
+        <span className="text-red-600">Date not available</span>
+      )}
+    </p>
+
+    <p className="text-lg font-semibold text-gray-700">Location: <span className="text-lg text-orange-800">{detail.location}</span></p>
+
+    {detail.founder && detail.founder.length > 0 && (
+      <div className="mb-4">
+        <h3 className="text-xl font-semibold mb-2 text-gray-700">Founder</h3>
+        {detail.founder.map(proj => (
+          
+          <p key={proj.id} className="inline-flex items-center text-lg text-green-700  text-2xl py-1 mt-3 mr-3">{proj.name}</p>
+          
+        ))}
+      </div>
+    )}
 
     {detail.parent_company && detail.parent_company.length > 0 && (
       <div className="mb-4">

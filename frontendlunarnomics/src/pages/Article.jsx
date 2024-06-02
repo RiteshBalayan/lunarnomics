@@ -34,7 +34,7 @@ const Article = () => {
                 <div className="middle-line-top">
                   <Routes>
                     <Route path="/news/:pk" element={<NewsDetail />} />
-                    <Route path="/company/:id" element={<CompanyDetail />} />
+                    <Route path="/company/:id" element={<CompanyDetail type="main"/>} />
                     <Route path="/project/:id" element={<ProjectDetail type="main"/>} />
                     <Route path="/general/:pk" element={<ArticleGeneral />} />
                     <Route path="/launch/:id" element={<LaunchDetail type="main"/> } />
@@ -47,8 +47,7 @@ const Article = () => {
         <div className="banner last">
         <div className='last-line'>
                 <Routes>
-                    <Route path="/news/:pk" element={<LaunchList />} />
-                    <Route path="/company/:id" element={<ProjectList />} />
+                    <Route path="/company/:id" element={<React.Fragment> <CompanyDetail type="sidebar"/> <CompanyList /> </React.Fragment>} />
                     <Route path="/project/:id" element={<ProjectDetail type="sidebar"/>} />
                     <Route path="/launch/:id" element={<LaunchDetail type="sidebar"/> } />
                   </Routes>
