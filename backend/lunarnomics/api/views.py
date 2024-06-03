@@ -1,7 +1,7 @@
 from rest_framework import generics
-from .models import NewsStory, Company, Project, Launch, Article
+from .models import NewsStory, Company, Project, Launch, Article, Capital
 from .serializers import NewsStorySerializer, NewsStorySerializerlist, CompanySerializer, ProjectSerializer, LaunchSerializer
-from .serializers import ArticleSerializer, ArticleSerializerlist, ArticleSerializerCapitallist
+from .serializers import ArticleSerializer, ArticleSerializerlist, ArticleSerializerCapitallist, CapitalSerializer
 from rest_framework.pagination import PageNumberPagination
 
 
@@ -60,3 +60,7 @@ class ArticleCapitalListView(generics.ListAPIView):
     queryset = Article.objects.filter(type='capital')
     serializer_class = ArticleSerializerCapitallist
     pagination_class = CustomPageNumberPagination
+
+class CapitalDetailView(generics.RetrieveAPIView):
+    queryset = Capital.objects.all()
+    serializer_class = CapitalSerializer

@@ -31,7 +31,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://your-domain.com',
     'https://jpb2viz63a.ap-south-1.awsapprunner.com',
     'https://api.lunarnomics.info',
-    'https://lunarnomics.info',
 ]
 
 
@@ -161,7 +160,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'https://main.d1yhf7xynhb25k.amplifyapp.com',
-    'https://api.lunarnomics.info',
     'https://lunarnomics.info',
 ]
 

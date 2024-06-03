@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import NewsStory, Paragraph, Image, Reference, Company, Article, Launch, Project, Technology, Capital, People
+from .models import NewsStory, Paragraph, Image, Reference, Company, Article, Launch, Project, Technology, Capital, People, CapitalToComapny, CapitalToProject
 
 class TechnologySerializer(serializers.ModelSerializer):
     class Meta:
@@ -67,11 +67,63 @@ class ArticleSerializerlist(serializers.ModelSerializer):
                 return related_model.id
         return None
 
+class CompanySerializerInLine(serializers.ModelSerializer):
+
+    class Meta:
+        model = Company
+        fields = ('__all__')
+
 class CapitalInLine(serializers.ModelSerializer):
+    capital_from = CompanySerializerInLine(many=True, read_only=True)
 
     class Meta:
         model = Capital
         fields = ('__all__')
+
+        
+class CapitalToComapnyInLine(serializers.ModelSerializer):
+
+    parent_capital = serializers.SerializerMethodField()
+
+    def get_parent_capital(self, obj):
+        capitals = obj.capital_to_company_Capital.all()
+        return CapitalInLine(capitals, many=True).data
+
+    class Meta:
+        model = CapitalToComapny
+        fields = ('__all__')
+
+class CapitalToProjectInLine(serializers.ModelSerializer):
+
+    parent_capital = serializers.SerializerMethodField()
+
+    def get_parent_capital(self, obj):
+        capitals = obj.capital_to_project_Capital.all()
+        return CapitalInLine(capitals, many=True).data
+
+    class Meta:
+        model = CapitalToProject
+        fields = ('__all__')
+
+
+class ProjectSerializerInLine(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ('name', 'id','logo', 'objective', 'start_date')
+
+
+class CapitalSerializer(serializers.ModelSerializer):
+    capital_from = CompanySerializerInLine(many=True, read_only=True)
+    capital_to_company = CompanySerializerInLine(many=True, read_only=True)
+    capital_to_project = ProjectSerializerInLine(many=True, read_only=True)
+    article = ArticleSerializer(read_only=True)
+    parent_capital = CapitalInLine(many=True, read_only=True)
+    daughter_capital = CapitalInLine(many=True, read_only=True)
+
+    class Meta:
+        model = Capital
+        fields = ('__all__')
+
 
 class ArticleSerializerCapitallist(serializers.ModelSerializer):
     
@@ -81,12 +133,6 @@ class ArticleSerializerCapitallist(serializers.ModelSerializer):
         model = Article
         fields = ('pk','title', 'type' ,'subtitle', 'paragraphs', 'images', 'reference', 'publish_date', 'author_name', 'thumbnail', 'capital')
 
-
-class CompanySerializerInLine(serializers.ModelSerializer):
-
-    class Meta:
-        model = Company
-        fields = ('__all__')
 
 class PeopleSerializerInLine(serializers.ModelSerializer):
 
@@ -100,16 +146,16 @@ class CompanySerializer(serializers.ModelSerializer):
     parent_company = CompanySerializerInLine(many=True, read_only=True)
     daughter_company = CompanySerializerInLine(many=True, read_only=True)
     founder = PeopleSerializerInLine(many=True, read_only=True)
+    capital = serializers.SerializerMethodField()
 
+    def get_capital(self, obj):
+        capitals = CapitalToComapny.objects.filter(name=obj)
+        return CapitalToComapnyInLine(capitals, many=True).data
+    
     class Meta:
         model = Company
         fields = ('__all__')
 
-
-class ProjectSerializerInLine(serializers.ModelSerializer):
-    class Meta:
-        model = Project
-        fields = ('name', 'id','logo', 'objective', 'start_date')
 
 class ProjectSerializer(serializers.ModelSerializer):
     article = ArticleSerializer(read_only=True)
@@ -117,10 +163,15 @@ class ProjectSerializer(serializers.ModelSerializer):
     daughter_projects = ProjectSerializerInLine(many=True, read_only=True)
     developers = CompanySerializerInLine(many=True, read_only=True)
     codevelopers = CompanySerializerInLine(many=True, read_only=True)
+    capital = serializers.SerializerMethodField()
+
+    def get_capital(self, obj):
+        capitals = CapitalToProject.objects.filter(name=obj)
+        return CapitalToProjectInLine(capitals, many=True).data
 
     class Meta:
         model = Project
-        fields = ('name', 'id', 'logo', 'objective', 'start_date','article', 'parent_projects', 'daughter_projects', 'developers', 'codevelopers', 'reference')
+        fields = ('name', 'id', 'logo', 'objective', 'start_date','capital','article', 'parent_projects', 'daughter_projects', 'developers', 'codevelopers', 'reference')
 
 
 
