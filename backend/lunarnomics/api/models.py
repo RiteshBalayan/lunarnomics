@@ -43,6 +43,23 @@ class Image(models.Model):
             return f"{truncated_words}{' |' if truncated_words else ''} {self.order}"
         else:
             return truncated_words
+        
+class YoutubeEmbed(models.Model):
+    url = models.URLField()
+    caption = models.CharField(max_length=200, blank=True)
+    order = models.PositiveIntegerField(blank=True)
+
+    def __str__(self):
+        # Split the title or content into words
+        words = self.caption.split() if self.caption else "image"
+        # Take the first 7 words (or all words if there are fewer than 7)
+        truncated_words = ' '.join(words[:7])
+        # If order exists, append it with a "|"
+        if self.order:
+            return f"{truncated_words}{' |' if truncated_words else ''} {self.order}"
+        else:
+            return truncated_words
+
 
 class Article(models.Model):
     type = [
@@ -58,6 +75,7 @@ class Article(models.Model):
     type = models.CharField(max_length=20, choices=type, blank=True)
     paragraphs = models.ManyToManyField('Paragraph', related_name='paragraphs_Article', blank=True)
     images = models.ManyToManyField('Image', related_name='images_Article', blank=True)
+    video = models.ManyToManyField('YoutubeEmbed', related_name='video_YoutubeEnbed', blank=True)
     publish_date = models.DateField(auto_now_add=True)
     author_name = models.CharField(max_length=100, blank=True)
     thumbnail = models.ImageField(upload_to='article_thumbnails/', blank=True, null=True)

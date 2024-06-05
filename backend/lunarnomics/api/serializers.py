@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import NewsStory, Paragraph, Image, Reference, Company, Article, Launch, Project, Technology, Capital, People, CapitalToComapny, CapitalToProject
+from .models import NewsStory, Paragraph, Image, YoutubeEmbed, Reference, Company, Article, Launch, Project, Technology, Capital, People, CapitalToComapny, CapitalToProject
 
 class TechnologySerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +14,11 @@ class ParagraphSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
+        fields = '__all__'
+
+class YoutubeEmbedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = YoutubeEmbed
         fields = '__all__'
 
 class ReferenceSerializer(serializers.ModelSerializer):
@@ -43,11 +48,12 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     paragraphs = ParagraphSerializer(many=True, read_only=True)
     images = ImageSerializer(many=True, read_only=True)
+    video = YoutubeEmbedSerializer(many=True, read_only=True)
     reference = ReferenceSerializer(many=True, read_only=True)
 
     class Meta:
         model = Article
-        fields = ('pk','title', 'type' ,'subtitle', 'paragraphs', 'images', 'reference', 'publish_date', 'author_name', 'thumbnail')
+        fields = ('pk','title', 'type' ,'subtitle', 'paragraphs', 'images','video','reference', 'publish_date', 'author_name', 'thumbnail')
 
 class ArticleSerializerlist(serializers.ModelSerializer):
     identity_number = serializers.SerializerMethodField()

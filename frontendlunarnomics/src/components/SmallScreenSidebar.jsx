@@ -22,15 +22,15 @@ const SmallScreenSidebar = () => {
 
   return (
     <div className="relative">
-      <div className="lg:hidden fixed inset-y-0 left-0 flex items-center">
+      <div className="lg:hidden fixed inset-y-0 left-0 flex items-center ">
         <button
           onClick={toggleSidebar}
-          className="bg-blue-500 text-white p-2 rounded-r-md"
+          className="bg-blue-500 text-white p-2 rounded-r-md z-50"
         >
           →
         </button>
       </div>
-
+      
       <Transition
         show={isOpen}
         enter="transition ease-in-out duration-300 transform"

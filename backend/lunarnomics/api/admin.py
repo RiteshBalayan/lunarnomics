@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Reference, Paragraph, Image, Article, NewsStory, Company, Project, Technology, Launch, Probe, CapitalToComapny, CapitalToProject, CapitalToTechnology, CapitalToProbe, CapitalToLaunch, Capital
-from .models import NewsStory, Paragraph, Image, Reference, People
+from .models import NewsStory, Paragraph, Image, Reference, People, YoutubeEmbed
 from django.contrib.admin.widgets import AdminFileWidget
 from django.utils.html import format_html
 
@@ -16,6 +16,7 @@ class ImageInline(admin.TabularInline):
 class ReferenceInline(admin.TabularInline):
     model = Reference.reference_NewsStory.through
     extra = 1
+
 
 class NewsStoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'subtitle', 'publish_date', 'author_name')
@@ -49,6 +50,10 @@ class AImageInline(admin.TabularInline):
     model = Image.images_Article.through
     extra = 1
 
+class AYoutubeEmbedInline(admin.TabularInline):
+    model = YoutubeEmbed.video_YoutubeEnbed.through
+    extra = 1
+
 class AReferenceInline(admin.TabularInline):
     model = Reference.reference_Article.through
     extra = 1
@@ -64,7 +69,7 @@ class ArticleAdmin(admin.ModelAdmin):
             'fields': ('title', 'subtitle', 'type','author_name', 'thumbnail',"thumbnail_image")
         }),
     )
-    inlines = [AParagraphInline, AImageInline, AReferenceInline]
+    inlines = [AParagraphInline, AImageInline, AYoutubeEmbedInline, AReferenceInline]
 
     #To make title and subtitle field type section longer
     def formfield_for_dbfield(self, db_field, **kwargs):
@@ -254,6 +259,7 @@ admin.site.register(Capital, CapitalAdmin)
 admin.site.register(Reference)
 admin.site.register(Paragraph)
 admin.site.register(Image)
+admin.site.register(YoutubeEmbed)
 #admin.site.register(Article)
 #admin.site.register(NewsStory)
 #admin.site.register(Company)

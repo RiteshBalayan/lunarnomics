@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 
 const ArticleDetail = () => {
   const { pk } = useParams(); // Get the pk from the URL params
@@ -27,7 +28,7 @@ const ArticleDetail = () => {
   }
 
   // Merge paragraphs and images into a single array
-  const combinedContent = [...newsStory.paragraphs, ...newsStory.images];
+  const combinedContent = [...newsStory.paragraphs, ...newsStory.images, ...newsStory.video];
 
   // Sort combined content by their order fields
   const sortedContent = combinedContent.sort((a, b) => a.order - b.order);
@@ -42,17 +43,29 @@ const ArticleDetail = () => {
       {/* Render paragraphs and images */}
       {sortedContent.map(content => (
         <div key={content.id} className="mb-4">
+
           {content.content ? ( // Check if content is a paragraph
             <>
               <h3 className="text-xl font-semibold mb-2">{content.title}</h3>
               <p>{content.content}</p>
             </>
-          ) : ( // If content is an image
+          ) : content.image ? ( // If content is an image
             <>
               <img src={content.image} alt={content.caption} className="mb-2" />
               <p className="text-sm text-gray-600">{content.caption}</p>
             </>
-          )}
+          ) : content.url ? ( // If content is a video
+            <>
+              <h3 className="text-xl font-semibold mb-2">{content.title}</h3>
+            <ReactPlayer
+            url={content.url}
+            width="100%"
+            
+            controls={true}
+          />
+            </>
+          ) : null // Default case if none of the conditions match
+          }
         </div>
       ))}
     </div>

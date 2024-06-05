@@ -82,9 +82,10 @@ const Headlines = () => {
             {selectedCategory === 'news_story' ? (
               // Add a conditional link for the 'news_story' category
               <Link to={`/page/news/${item.pk}`}>
-                    <div key={index} className="flex border border-gray-300 rounded-lg mt-4">
+                    <div key={index} className="border border-gray-300 rounded-lg mt-4">
+                      <div className="sm:flex">
                       {/* Left Side (Thumbnail or "NEWS") */}
-                      <div className="flex-shrink-0 w-60 h-60 bg-gray-200 flex items-center justify-center">
+                      <div className="w-full sm:w-60 h-60 bg-gray-200 flex items-center justify-center">
                         {item.thumbnail ? (
                           <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover rounded-lg" />
                         ) : (
@@ -92,20 +93,22 @@ const Headlines = () => {
                         )}
                       </div>
                       {/* Right Side (Content) */}
-                      <div className="flex-1 p-4">
+                      <div className="p-4 sm:flex-1">
                         <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                         <h4 className="text-lg mb-2">{item.subtitle}</h4>
                         <p className="text-gray-600">Author: {item.author_name}</p>
                         <p className="text-gray-600">Publish Date: {item.publish_date}</p>
+                      </div>
                       </div>
                     </div>
               </Link>
             ) : selectedCategory === 'article' ? (
               // Add a conditional link for the 'article' category
               <Link to={`/page/general/${item.pk}`}>
-                    <div key={index} className="flex border border-gray-300 rounded-lg mt-4">
+                    <div key={index} className="border border-gray-300 rounded-lg mt-4">
+                      <div className="sm:flex">
                       {/* Left Side (Thumbnail or "NEWS") */}
-                      <div className="flex-shrink-0 w-60 h-60 bg-gray-200 flex items-center justify-center">
+                      <div className="w-full sm:w-60 h-60 bg-gray-200 flex items-center justify-center">
                         {item.thumbnail ? (
                           <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover rounded-lg" />
                         ) : (
@@ -113,31 +116,34 @@ const Headlines = () => {
                         )}
                       </div>
                       {/* Right Side (Content) */}
-                      <div className="flex-1 p-4">
+                      <div className="p-4 sm:flex-1">
                         <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                         <h4 className="text-lg mb-2">{item.subtitle}</h4>
                         <p className="text-gray-600">Author: {item.author_name}</p>
                         <p className="text-gray-600">Publish Date: {item.publish_date}</p>
+                      </div>
                       </div>
                     </div>
               </Link>
             ) : (
               // Add a conditional link for the 'investment_news' category
               <Link to={`/page/investment/${item.pk}`}>
-                    <div key={index} className="flex border border-gray-300 rounded-lg mt-4">
-                      {/* Left Side (Thumbnail or "NEWS") */}
-                      <div className="flex-shrink-0 w-60 h-60 bg-gray-200 flex items-center justify-center">
-                        {item.thumbnail ? (
-                          <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover rounded-lg" />
-                        ) : (
-                          <span className="text-2xl font-semibold text-gray-600">NEWS</span>
-                        )}
+                      <div key={index} className="border border-gray-300 rounded-lg mt-4">
+                        <div className="sm:flex">
+                          {/* Left Side (Thumbnail or "NEWS") */}
+                          <div className="w-full sm:w-60 h-60 bg-gray-200 flex items-center justify-center">
+                            {item.thumbnail ? (
+                              <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover rounded-lg" />
+                            ) : (
+                              <span className="text-2xl font-semibold text-gray-600">NEWS</span>
+                            )}
+                          </div>
+                          {/* Right Side (Content) */}
+                          <div className="p-4 sm:flex-1">
+                            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                          </div>
+                        </div>
                       </div>
-                      {/* Right Side (Content) */}
-                      <div className="flex-1 p-4">
-                        <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                      </div>
-                    </div>
               </Link>
             )}
           </li>

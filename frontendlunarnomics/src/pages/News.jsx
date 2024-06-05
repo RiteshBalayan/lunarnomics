@@ -14,7 +14,9 @@ import SmallScreenSidebar from '../components/SmallScreenSidebar';
 const News = () => {
   return (
     <div className="home-page">
+      <div >
       <SmallScreenSidebar />
+      </div>
       <div className="banner-wrapper">
         <div className="banner first">
           <Logo />
