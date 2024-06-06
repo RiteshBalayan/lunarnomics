@@ -133,7 +133,11 @@ class CapitalSerializer(serializers.ModelSerializer):
 
 class ArticleSerializerCapitallist(serializers.ModelSerializer):
     
-    capital = serializers.StringRelatedField(source='article_Capital')
+    capital = CapitalSerializer(source='article_Capital', read_only=True)
+
+    def get_capital(self, obj):
+        capitals = obj.article_Capital.all()
+        return CapitalInLine(capitals, many=True).data
 
     class Meta:
         model = Article

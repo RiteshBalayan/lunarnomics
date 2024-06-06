@@ -8,6 +8,7 @@ import ProjectDetail from '../components/ProjectDetail';
 import LaunchList from '../components/LaunchList';
 import LaunchDetail from '../components/LaunchDetail';
 import ArticleGeneral from '../components/ArticleGeneral';
+import CapitalNews from '../components/CapitalNews';
 import Logo from '../components/Logo';
 import AnimatedNumber from '../components/AnimatedNumber';
 import SmallScreenSidebar from '../components/SmallScreenSidebar';
@@ -37,6 +38,7 @@ const Article = () => {
                     <Route path="/company/:id" element={<CompanyDetail type="main"/>} />
                     <Route path="/project/:id" element={<ProjectDetail type="main"/>} />
                     <Route path="/general/:pk" element={<ArticleGeneral />} />
+                    <Route path="/investment/:id" element={<CapitalNews />} />
                     <Route path="/launch/:id" element={<LaunchDetail type="main"/> } />
                   </Routes>
                 </div>

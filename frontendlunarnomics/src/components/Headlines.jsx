@@ -24,9 +24,6 @@ const Headlines = () => {
         case 'investment_news':
           apiUrl = 'https://jpb2viz63a.ap-south-1.awsapprunner.com/api/article/capital/';
           break;
-        default:
-          apiUrl = 'https://jpb2viz63a.ap-south-1.awsapprunner.com/api/article/general/';
-          break;
       }
       const response = await fetch(apiUrl);
       const jsonData = await response.json();
@@ -127,7 +124,7 @@ const Headlines = () => {
               </Link>
             ) : (
               // Add a conditional link for the 'investment_news' category
-              <Link to={`/page/investment/${item.pk}`}>
+              <Link to={`/page/investment/${item.capital?.id}`}>
                       <div key={index} className="border border-gray-300 rounded-lg mt-4">
                         <div className="sm:flex">
                           {/* Left Side (Thumbnail or "NEWS") */}
@@ -141,6 +138,7 @@ const Headlines = () => {
                           {/* Right Side (Content) */}
                           <div className="p-4 sm:flex-1">
                             <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                            <h2>{item.type}</h2>
                           </div>
                         </div>
                       </div>
