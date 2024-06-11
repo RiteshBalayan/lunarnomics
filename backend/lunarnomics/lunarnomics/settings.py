@@ -161,6 +161,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'https://main.d1yhf7xynhb25k.amplifyapp.com',
     'https://lunarnomics.info',
+    'https://www.lunarnomics.info'
 ]
 
 '''
