@@ -16,13 +16,13 @@ const Headlines = () => {
       let apiUrl = '';
       switch (category) {
         case 'article':
-          apiUrl = 'https://jpb2viz63a.ap-south-1.awsapprunner.com/api/article/general/';
+          apiUrl = 'http://127.0.0.1:8000/api/article/general/';
           break;
         case 'news_story':
-          apiUrl = 'https://jpb2viz63a.ap-south-1.awsapprunner.com/api/news/';
+          apiUrl = 'http://127.0.0.1:8000/api/news/';
           break;
         case 'investment_news':
-          apiUrl = 'https://jpb2viz63a.ap-south-1.awsapprunner.com/api/article/capital/';
+          apiUrl = 'http://127.0.0.1:8000/api/article/capital/';
           break;
       }
       const response = await fetch(apiUrl);

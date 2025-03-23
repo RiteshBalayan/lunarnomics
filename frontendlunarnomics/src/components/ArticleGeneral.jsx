@@ -9,7 +9,7 @@ const ArticleDetail = () => {
   useEffect(() => {
     const fetchNewsStory = async () => {
       try {
-        const response = await fetch(`https://jpb2viz63a.ap-south-1.awsapprunner.com/api/article/${pk}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/article/${pk}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

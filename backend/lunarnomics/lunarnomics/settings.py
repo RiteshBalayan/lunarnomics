@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'lunarnomics.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -105,7 +105,7 @@ DATABASES = {
         'PORT': '5432',  
     }
 }
-
+'''
 
 
 
@@ -146,12 +146,13 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+'''
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'https://lunarnomics.s3.ap-south-1.amazonaws.com/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'https://lunarnomics.s3.ap-south-1.amazonaws.com/media/'
-
+'''
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -164,7 +165,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://www.lunarnomics.info'
 ]
 
-'''
+
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -173,8 +174,8 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-'''
 
+'''
 #S3 setup
 AWS_ACCESS_KEY_ID = 'AKIASSDCVFHFVB6MI5LG'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -188,3 +189,4 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_ENDPOINT_URL = "https://lunarnomics.s3.ap-south-1.amazonaws.com"
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+'''

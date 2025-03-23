@@ -9,7 +9,7 @@ const LaunchDetail = ({ type }) => {
   useEffect(() => {
     const fetchdetail = async () => {
       try {
-        const response = await fetch(`https://jpb2viz63a.ap-south-1.awsapprunner.com/api/launch/${id}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/launch/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

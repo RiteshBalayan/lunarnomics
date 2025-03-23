@@ -8,7 +8,7 @@ const TableComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://jpb2viz63a.ap-south-1.awsapprunner.com/api/launch/');
+        const response = await fetch('http://127.0.0.1:8000/api/launch/');
         const jsonData = await response.json();
         const formattedData = jsonData.map(item => ({
           ...item,
