@@ -9,7 +9,7 @@ const ProjectDetail = ({ type }) => {
   useEffect(() => {
     const fetchdetail = async () => {
       try {
-        const response = await fetch(`https://jpb2viz63a.ap-south-1.awsapprunner.com/api/project/${id}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/project/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
